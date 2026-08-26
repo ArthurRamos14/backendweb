@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;      
+          justify-content: center;  
+          height: 100vh;
+          font-family: Arial;
+        }
+    
+        #catalogo {
+          margin-top: 20px;
+          text-align: center;
+        }
+    
+        input {
+          padding: 8px;
+          font-size: 16px;
+        }
+      </style>
+   
+    
+      <input type="text" id="busca" placeholder="Buscar produto...">
+    
+      <div id="catalogo"></div>
+    
+      <script>
+        const produtos = [
+          { nome: "Placa de Vídeo RTX 3060", preco: "R$ 2.500" },
+          { nome: "Processador Ryzen 7", preco: "R$ 1.800" },
+          { nome: "Memória RAM 16GB", preco: "R$ 450" },
+          { nome: "SSD NVMe 1TB", preco: "R$ 600" }
+        ];
+    
+        const catalogo = document.getElementById("catalogo");
+        const busca = document.getElementById("busca");
+    
+        function mostrar(lista) {
+          catalogo.innerHTML = "";
+    
+          if (lista.length === 0) {
+            catalogo.innerHTML = "Putz! Não encontramos esse componente";
+            return;
+          }
+    
+          lista.forEach(p => {
+            catalogo.innerHTML += `<p>${p.nome} - ${p.preco}</p>`;
+          });
+        }
+    
+        mostrar(produtos);
+    
+        busca.addEventListener("input", () => {
+          const texto = busca.value.toLowerCase();
+    
+          const filtrados = produtos.filter(p =>
+            p.nome.toLowerCase().includes(texto)
+          );
+    
+          mostrar(filtrados);
+        });
+      </script>
+    
+</body>
+</html>
